@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astral Veil 星幕秘语</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="星座导航">
+        <div class="brand">
+          <div class="brand-mark">✦</div>
+          <div>
+            <p>Astral Veil</p>
+            <strong>星幕秘语</strong>
+          </div>
+        </div>
+
+        <nav class="sign-grid" id="signGrid"></nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="hero">
+          <div>
+            <p class="eyebrow">西方命理 · 星座运势 · 塔罗灵感</p>
+            <h1 id="heroTitle">白羊座今日星象</h1>
+            <p class="hero-copy" id="heroCopy"></p>
+          </div>
+          <div class="moon-orbit" aria-hidden="true">
+            <span class="moon"></span>
+            <span class="orbit-dot dot-a"></span>
+            <span class="orbit-dot dot-b"></span>
+          </div>
+        </header>
+
+        <section class="toolbar" aria-label="运势周期切换">
+          <div class="period-tabs" id="periodTabs">
+            <button class="active" data-period="daily" type="button">今日</button>
+            <button data-period="weekly" type="button">本周</button>
+            <button data-period="monthly" type="button">本月</button>
+          </div>
+          <div class="date-pill" id="datePill"></div>
+        </section>
+
+        <section class="dashboard">
+          <article class="fortune-card lead-card">
+            <div class="card-heading">
+              <span>综合运势</span>
+              <strong id="overallScore">82</strong>
+            </div>
+            <p id="summaryText"></p>
+            <div class="keyword-row" id="keywordRow"></div>
+          </article>
+
+          <article class="fortune-card">
+            <div class="card-heading">
+              <span>能量维度</span>
+              <strong id="energyLabel">稳定上升</strong>
+            </div>
+            <div class="score-list" id="scoreList"></div>
+          </article>
+
+          <article class="fortune-card">
+            <div class="card-heading">
+              <span>幸运提示</span>
+              <strong id="luckyNumber">8</strong>
+            </div>
+            <div class="lucky-layout">
+              <div>
+                <small>幸运色</small>
+                <span id="luckyColor">星尘金</span>
+              </div>
+              <div>
+                <small>幸运方位</small>
+                <span id="luckyDirection">西南</span>
+              </div>
+            </div>
+            <p class="advice" id="adviceText"></p>
+          </article>
+
+          <article class="fortune-card tarot-card">
+            <div class="card-heading">
+              <span>今日塔罗</span>
+              <button id="drawCard" type="button" aria-label="抽取塔罗牌">抽牌</button>
+            </div>
+            <div class="tarot-stage">
+              <div class="tarot-face" id="tarotFace">☾</div>
+              <div>
+                <strong id="tarotName">女祭司</strong>
+                <p id="tarotMeaning">直觉正在变得清晰，适合安静观察，而不是急着给出答案。</p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="cosmic-calendar">
+          <div class="section-heading">
+            <h2>星象日历</h2>
+            <p>重要星象会影响情绪、沟通、关系和行动节奏。</p>
+          </div>
+          <div class="event-strip" id="eventStrip"></div>
+        </section>
+
+        <footer class="disclaimer">
+          内容用于娱乐、灵感记录与自我反思，不作为医疗、法律、投资或重大人生决策依据。
+        </footer>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
