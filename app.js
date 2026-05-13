@@ -1,16 +1,16 @@
 const signs = [
-  { id: "aries", zh: "白羊座", en: "Aries", symbol: "♈", element: "火象" },
-  { id: "taurus", zh: "金牛座", en: "Taurus", symbol: "♉", element: "土象" },
-  { id: "gemini", zh: "双子座", en: "Gemini", symbol: "♊", element: "风象" },
-  { id: "cancer", zh: "巨蟹座", en: "Cancer", symbol: "♋", element: "水象" },
-  { id: "leo", zh: "狮子座", en: "Leo", symbol: "♌", element: "火象" },
-  { id: "virgo", zh: "处女座", en: "Virgo", symbol: "♍", element: "土象" },
-  { id: "libra", zh: "天秤座", en: "Libra", symbol: "♎", element: "风象" },
-  { id: "scorpio", zh: "天蝎座", en: "Scorpio", symbol: "♏", element: "水象" },
-  { id: "sagittarius", zh: "射手座", en: "Sagittarius", symbol: "♐", element: "火象" },
-  { id: "capricorn", zh: "摩羯座", en: "Capricorn", symbol: "♑", element: "土象" },
-  { id: "aquarius", zh: "水瓶座", en: "Aquarius", symbol: "♒", element: "风象" },
-  { id: "pisces", zh: "双鱼座", en: "Pisces", symbol: "♓", element: "水象" }
+  { id: "aries", zh: "白羊座", en: "Aries", symbol: "♈", element: "火象", range: "3/21 - 4/19" },
+  { id: "taurus", zh: "金牛座", en: "Taurus", symbol: "♉", element: "土象", range: "4/20 - 5/20" },
+  { id: "gemini", zh: "双子座", en: "Gemini", symbol: "♊", element: "风象", range: "5/21 - 6/20" },
+  { id: "cancer", zh: "巨蟹座", en: "Cancer", symbol: "♋", element: "水象", range: "6/21 - 7/22" },
+  { id: "leo", zh: "狮子座", en: "Leo", symbol: "♌", element: "火象", range: "7/23 - 8/22" },
+  { id: "virgo", zh: "处女座", en: "Virgo", symbol: "♍", element: "土象", range: "8/23 - 9/22" },
+  { id: "libra", zh: "天秤座", en: "Libra", symbol: "♎", element: "风象", range: "9/23 - 10/22" },
+  { id: "scorpio", zh: "天蝎座", en: "Scorpio", symbol: "♏", element: "水象", range: "10/23 - 11/21" },
+  { id: "sagittarius", zh: "射手座", en: "Sagittarius", symbol: "♐", element: "火象", range: "11/22 - 12/21" },
+  { id: "capricorn", zh: "摩羯座", en: "Capricorn", symbol: "♑", element: "土象", range: "12/22 - 1/19" },
+  { id: "aquarius", zh: "水瓶座", en: "Aquarius", symbol: "♒", element: "风象", range: "1/20 - 2/18" },
+  { id: "pisces", zh: "双鱼座", en: "Pisces", symbol: "♓", element: "水象", range: "2/19 - 3/20" }
 ];
 
 const periodNames = {
@@ -47,6 +47,34 @@ const signVoices = {
   capricorn: ["责任", "结构", "成果", "给野心一套可执行的日程，它会安静开花。"],
   aquarius: ["革新", "社群", "灵感", "独特想法需要落地场景，别只停在脑内星图。"],
   pisces: ["梦境", "共情", "流动", "把感受写下来，你会看见隐藏的方向感。"]
+};
+
+const topicCopy = {
+  love: {
+    label: "爱情关系",
+    focus: "关系里的真实需求会浮出水面",
+    action: "先确认自己的边界，再表达期待；温柔但明确，比猜测更有力量。"
+  },
+  career: {
+    label: "事业发展",
+    focus: "工作节奏进入可调整期",
+    action: "把目标拆成三步，并优先推进最能被看见的成果。"
+  },
+  wealth: {
+    label: "财富机会",
+    focus: "资源分配和价值判断变得重要",
+    action: "适合盘点收入、支出和长期投入，避免被短期情绪带着消费。"
+  },
+  health: {
+    label: "身心状态",
+    focus: "身体会提醒你哪里需要慢下来",
+    action: "把睡眠、饮食和运动先调回稳定，不要用意志力硬扛疲惫。"
+  },
+  decision: {
+    label: "重要选择",
+    focus: "你会更想要一个清晰答案",
+    action: "把选择写成利弊清单，再问自己哪一个更接近长期的自由感。"
+  }
 };
 
 const tarotCards = [
@@ -87,10 +115,34 @@ const tarotFace = document.querySelector("#tarotFace");
 const tarotName = document.querySelector("#tarotName");
 const tarotMeaning = document.querySelector("#tarotMeaning");
 const eventStrip = document.querySelector("#eventStrip");
+const birthForm = document.querySelector("#birthForm");
+const profileSign = document.querySelector("#profileSign");
+const profileSummary = document.querySelector("#profileSummary");
+const profileGrid = document.querySelector("#profileGrid");
 
 function seededScore(seed, offset) {
   const value = Math.sin(seed * 12.9898 + offset * 78.233) * 43758.5453;
   return 62 + Math.floor((value - Math.floor(value)) * 34);
+}
+
+function getSunSign(dateValue) {
+  const date = new Date(`${dateValue}T12:00:00`);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const marker = month * 100 + day;
+
+  if (marker >= 321 && marker <= 419) return signs[0];
+  if (marker >= 420 && marker <= 520) return signs[1];
+  if (marker >= 521 && marker <= 620) return signs[2];
+  if (marker >= 621 && marker <= 722) return signs[3];
+  if (marker >= 723 && marker <= 822) return signs[4];
+  if (marker >= 823 && marker <= 922) return signs[5];
+  if (marker >= 923 && marker <= 1022) return signs[6];
+  if (marker >= 1023 && marker <= 1121) return signs[7];
+  if (marker >= 1122 && marker <= 1221) return signs[8];
+  if (marker >= 1222 || marker <= 119) return signs[9];
+  if (marker >= 120 && marker <= 218) return signs[10];
+  return signs[11];
 }
 
 function getFortune() {
@@ -186,6 +238,31 @@ function renderEvents() {
     .join("");
 }
 
+function renderPersonalReading(data) {
+  const sign = getSunSign(data.birthDate);
+  const topic = topicCopy[data.topic];
+  const voice = signVoices[sign.id];
+  const name = data.name || "你";
+  const timeTone = data.birthTime ? `出生时间 ${data.birthTime} 让这次解读更偏向当下节奏。` : "没有填写出生时间，所以这里以太阳星座作为主要依据。";
+  const placeTone = data.birthPlace ? `出生地点记录为 ${data.birthPlace}，它象征你最熟悉的安全感来源。` : "可以补充出生地点，让档案更完整。";
+  const questionTone = data.question
+    ? `围绕“${data.question}”，答案更像一个逐步显现的方向，而不是马上定型的结论。`
+    : "如果写下更具体的问题，预测会更聚焦。";
+
+  activeSign = sign;
+  renderSigns();
+  renderFortune();
+
+  profileSign.textContent = `${sign.symbol} ${sign.zh}`;
+  profileSummary.textContent = `${name}，你的太阳星座是${sign.zh}，属于${sign.element}。这次预测主题是“${topic.label}”：${topic.focus}。${questionTone} ${topic.action}`;
+  profileGrid.innerHTML = `
+    <div><small>太阳星座</small><strong>${sign.zh}</strong><span>${sign.range}</span></div>
+    <div><small>元素能量</small><strong>${sign.element}</strong><span>${voice[0]} · ${voice[1]}</span></div>
+    <div><small>出生信息</small><strong>${data.birthDate}</strong><span>${timeTone}</span></div>
+    <div><small>地点线索</small><strong>${data.birthPlace || "未填写"}</strong><span>${placeTone}</span></div>
+  `;
+}
+
 function drawTarot() {
   const card = tarotCards[Math.floor(Math.random() * tarotCards.length)];
   tarotName.textContent = card[0];
@@ -217,6 +294,19 @@ periodTabs.addEventListener("click", (event) => {
     tab.classList.toggle("active", tab.dataset.period === activePeriod);
   });
   renderFortune();
+});
+
+birthForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(birthForm);
+  renderPersonalReading({
+    name: String(formData.get("userName") || "").trim(),
+    birthDate: String(formData.get("birthDate") || ""),
+    birthTime: String(formData.get("birthTime") || ""),
+    birthPlace: String(formData.get("birthPlace") || "").trim(),
+    topic: String(formData.get("predictionTopic") || "love"),
+    question: String(formData.get("predictionQuestion") || "").trim()
+  });
 });
 
 drawCard.addEventListener("click", drawTarot);

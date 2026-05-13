@@ -270,10 +270,121 @@ button {
   gap: 16px;
 }
 
+.personal-zone {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
 .fortune-card {
   border-radius: 8px;
   background: var(--panel);
   padding: 18px;
+}
+
+.birth-form {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(17, 18, 35, 0.72);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  backdrop-filter: blur(22px);
+}
+
+.form-heading {
+  margin-bottom: 16px;
+}
+
+.form-heading button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  min-width: 108px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 18px;
+  color: #16101d;
+  background: var(--gold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.form-grid label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.07);
+  outline: none;
+}
+
+.form-grid textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.form-grid input:focus,
+.form-grid select:focus,
+.form-grid textarea:focus {
+  border-color: rgba(232, 197, 107, 0.72);
+  box-shadow: 0 0 0 3px rgba(232, 197, 107, 0.12);
+}
+
+.wide-field {
+  grid-column: 1 / -1;
+}
+
+.personal-reading {
+  min-height: 100%;
+  background:
+    linear-gradient(150deg, rgba(32, 27, 59, 0.86), rgba(17, 18, 35, 0.78)),
+    var(--panel);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.profile-grid div {
+  min-height: 116px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.profile-grid small,
+.profile-grid span {
+  display: block;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.profile-grid strong {
+  display: block;
+  margin: 7px 0;
+  color: var(--gold);
+  font-size: 1rem;
 }
 
 .lead-card {
@@ -472,6 +583,7 @@ button {
   }
 
   .dashboard,
+  .personal-zone,
   .event-strip {
     grid-template-columns: 1fr 1fr;
   }
@@ -489,6 +601,9 @@ button {
 
   .sign-grid,
   .dashboard,
+  .personal-zone,
+  .form-grid,
+  .profile-grid,
   .event-strip {
     grid-template-columns: 1fr;
   }

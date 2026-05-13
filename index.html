@@ -44,6 +44,60 @@
           <div class="date-pill" id="datePill"></div>
         </section>
 
+        <section class="personal-zone">
+          <form class="birth-form" id="birthForm">
+            <div class="section-heading form-heading">
+              <div>
+                <h2>个人星盘档案</h2>
+                <p>输入生日后会自动推算太阳星座，出生时间与地点会用于增强解读氛围。</p>
+              </div>
+              <button type="submit">生成预测</button>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                <span>昵称</span>
+                <input id="userName" name="userName" type="text" placeholder="例如 Luna" autocomplete="name" />
+              </label>
+              <label>
+                <span>生日</span>
+                <input id="birthDate" name="birthDate" type="date" required />
+              </label>
+              <label>
+                <span>出生时间</span>
+                <input id="birthTime" name="birthTime" type="time" />
+              </label>
+              <label>
+                <span>出生地点</span>
+                <input id="birthPlace" name="birthPlace" type="text" placeholder="城市或地区" autocomplete="address-level2" />
+              </label>
+              <label>
+                <span>预测主题</span>
+                <select id="predictionTopic" name="predictionTopic">
+                  <option value="love">爱情关系</option>
+                  <option value="career">事业发展</option>
+                  <option value="wealth">财富机会</option>
+                  <option value="health">身心状态</option>
+                  <option value="decision">重要选择</option>
+                </select>
+              </label>
+              <label class="wide-field">
+                <span>想预测的问题</span>
+                <textarea id="predictionQuestion" name="predictionQuestion" rows="3" placeholder="例如：接下来一个月感情会有什么变化？"></textarea>
+              </label>
+            </div>
+          </form>
+
+          <article class="fortune-card personal-reading" id="personalReading">
+            <div class="card-heading">
+              <span>定制预测</span>
+              <strong id="profileSign">待生成</strong>
+            </div>
+            <p id="profileSummary">填写个人资料后，这里会出现根据生日、星座、预测主题和问题生成的定制化解读。</p>
+            <div class="profile-grid" id="profileGrid"></div>
+          </article>
+        </section>
+
         <section class="dashboard">
           <article class="fortune-card lead-card">
             <div class="card-heading">
